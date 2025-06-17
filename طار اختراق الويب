@@ -1,0 +1,46 @@
+#!/bin/bash
+
+clear
+echo "##############################################"
+echo "#      Hacker Super - Security Scan Tool     #"
+echo "#          For Kali Linux & Termux            #"
+echo "##############################################"
+echo ""
+
+while true; do
+    echo "1) Nmap - Port Scan"
+    echo "2) Nikto - Web Vulnerability Scan"
+    echo "3) SQLmap - SQL Injection Test"
+    echo "4) Exit"
+    echo -n "Choose an option: "
+    read option
+
+    case $option in
+        1)
+            echo -n "Enter target IP or domain: "
+            read target
+            echo "Running Nmap scan on $target..."
+            nmap -sS -Pn $target
+            ;;
+        2)
+            echo -n "Enter target URL (e.g. http://example.com): "
+            read target
+            echo "Running Nikto scan on $target..."
+            nikto -h $target
+            ;;
+        3)
+            echo -n "Enter target URL with parameters (e.g. http://example.com/page?id=1): "
+            read target
+            echo "Running SQLmap test on $target..."
+            sqlmap -u "$target" --batch
+            ;;
+        4)
+            echo "Exiting. Stay safe! - Hacker Super"
+            exit 0
+            ;;
+        *)
+            echo "Invalid option. Try again."
+            ;;
+    esac
+    echo ""
+done
